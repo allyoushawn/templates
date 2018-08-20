@@ -16,9 +16,9 @@ class VAE(object):
         self.mode = mode
 
         # Config
-        self.hid_dim = 512
-        self.code_dim = 100
-        self.init_lr = 0.00001
+        self.hid_dim = 500
+        self.code_dim = 20
+        self.init_lr = 1e-3
         self.feature_dim = 784
 
 
@@ -102,6 +102,7 @@ class VAE(object):
 
         self.merged_summary = tf.summary.merge_all()
         self.step = 0
+        self.x_mean = x_mean
 
 
     def setup_tensorboard(self, sess):
@@ -118,4 +119,10 @@ class VAE(object):
                               feed_dict=feed)
         self.step += 1
         self.writer.add_summary(summary, self.step)
+
+
+    def reconstruct(self, sess, x,):
+        feed={self.x: x}
+        return sess.run(self.x_mean,
+                              feed_dict=feed)
 
