@@ -27,8 +27,8 @@ def get_reconstruct(train_model, train_sess, x):
 if __name__ == '__main__':
     mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
     n_samples = mnist.train.num_examples
-    batch_size = 500
-    epoch_num = 5000
+    batch_size = 128
+    epoch_num = 60
 
     tr_model = TrainModel()
     tr_sess = tf.Session(target='', graph=tr_model.graph)

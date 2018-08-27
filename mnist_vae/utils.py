@@ -7,12 +7,20 @@ import numpy as np
 # Build a layer of dnn, that is , a fully-connected (fc) layer.
 def single_layer_fc(x, input_dim, output_dim, activation=None, scope='fc'):
     with tf.variable_scope(scope):
+        w_init = tf.contrib.layers.variance_scaling_initializer()
+        b_init = tf.constant_initializer(0.)
+        w = tf.get_variable('weights', [input_dim, output_dim],
+                                                         initializer=w_init)
+        b = tf.get_variable('bias', [output_dim],
+               initializer=b_init)
+        '''
         w = tf.get_variable('weights', [input_dim, output_dim],
                initializer=tf.random_uniform_initializer(minval=-0.08,
                                                          maxval=0.08))
         b = tf.get_variable('bias', [output_dim],
                initializer=tf.random_uniform_initializer(minval=-0.08,
                                                          maxval=0.08))
+        '''
 
         # activation = None -> Linear
         if activation == None:
